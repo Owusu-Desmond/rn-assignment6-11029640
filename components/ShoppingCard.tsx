@@ -1,29 +1,31 @@
 import { ComponentProps } from "react"
-import { Image, ImageBackground, StyleSheet, Text, TouchableHighlight, View } from "react-native"
+import { Image, ImageBackground, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from "react-native"
 
-type ShoppingCardProps = ComponentProps<typeof View> & {
+type ShoppingCardProps = {
     imageUrl: any,
     name: string,
     desc: string,
-    price: number
-}  
+    price: number,
+    onPress: () => void,
+    inCart: boolean
+  }
 
-const ShoppingCard = ({imageUrl, name, desc, price}: ShoppingCardProps) => {
+  const ShoppingCard = ({ imageUrl, name, desc, price, onPress, inCart }: ShoppingCardProps) => {
     return (
-        // <View>
-            <View style={styles.cardContainer}>
-                <ImageBackground style={styles.imageContainer} source={imageUrl}>
-                    <TouchableHighlight
-                        style={styles.addButton}
-                    >
-                        <Image source={require('../assets/add_circle.png')} />
-                    </TouchableHighlight>
-                </ImageBackground>
-                <Text style={styles.name}>{name}</Text>
-                <Text style={styles.desc}>{desc}</Text>
-                <Text style={styles.price}>${price}</Text>
-            </View>
-        // </View>
+        <View style={styles.cardContainer}>
+            <ImageBackground style={styles.imageContainer} source={imageUrl}>
+                <TouchableOpacity
+                    style={styles.addButton}
+                    onPress={onPress}
+                    disabled={inCart}
+                >
+                    <Image source={require('../assets/add_circle.png')} />
+                </TouchableOpacity>
+            </ImageBackground>
+            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.desc}>{desc}</Text>
+            <Text style={styles.price}>${price}</Text>
+        </View>
     )
 }
 
