@@ -1,6 +1,7 @@
 import ShoppingCard from "@/components/ShoppingCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect, useState } from "react";
+import { useFocusEffect } from "expo-router";
+import { useCallback, useEffect, useState } from "react";
 import { FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -17,10 +18,14 @@ export default function Index() {
   const [shop, setShop] = useState<ShopItem[]>([]);
   const [cart, setCart] = useState<ShopItem[]>([]);
 
-  useEffect(() => {
-    fetchShop();
-  }, []);
-  
+  useFocusEffect(
+    useCallback(() => {
+      console.log('Hello, I am focused!');
+      fetchShop();
+      fetchCart();
+    }, [])
+  );
+
   const initialShopList: ShopItem[] = [
     {
       id: 1,
@@ -65,6 +70,20 @@ export default function Index() {
       price: 120,
     },
   ]
+
+  const fetchCart = async () => {
+    try {
+      const data = await AsyncStorage.getItem('cart');
+      if (data !== null) {
+        setCart(JSON.parse(data));
+      } else {
+        setCart([]);
+      }
+    } catch (err: any) {
+      console.error('Error fetching cart:', err.message);
+    }
+  }
+
   const fetchShop = async () => {
     try {
       const data = await AsyncStorage.getItem('shop');
@@ -89,11 +108,11 @@ export default function Index() {
 
   const addToCart = async (item: ShopItem) => {
     console.log('adding');
-    
     const updatedCart = [...cart, item];
     setCart(updatedCart);
+    
     try {
-      await AsyncStorage.setItem('cart', JSON.stringify(cart));
+      await AsyncStorage.setItem('cart', JSON.stringify(updatedCart));
     } catch (err: any) {
       console.error('Error removing from cart:', err.message);
     }

@@ -1,5 +1,6 @@
 import { ComponentProps } from "react"
 import { Image, ImageBackground, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from "react-native"
+import { Icon } from "./Icon"
 
 type ShoppingCardProps = {
     imageUrl: any,
@@ -19,7 +20,7 @@ type ShoppingCardProps = {
                     onPress={onPress}
                     disabled={inCart}
                 >
-                    <Image source={require('../assets/add_circle.png')} />
+                    <Icon color={inCart ? 'green' : 'black'} name={inCart ? 'checkmark-circle-outline' : 'add-circle-outline'} size={28} />
                 </TouchableOpacity>
             </ImageBackground>
             <Text style={styles.name}>{name}</Text>
