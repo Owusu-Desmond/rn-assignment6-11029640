@@ -1,6 +1,12 @@
-# Welcome to your Expo app 👋
+# Welcome To DeShop Ecommerce App 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an e-commerce app that allows users to see the list of products on the home page, add a product to the cart page, and remove a project from the cart page.
+
+## App Preview
+
+<img width="217" alt="Capture2" src="https://github.com/Owusu-Desmond/rn-assignment6-11029640/assets/92303891/43a80062-472c-4dde-b34c-a10903c14e9c">
+<img width="217" alt="Capture" src="https://github.com/Owusu-Desmond/rn-assignment6-11029640/assets/92303891/6c868499-fa35-4bcd-b27b-2661873b5ef2">
+
 
 ## Get started
 
